@@ -2,6 +2,7 @@ package de.gpsTrack.controler;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 import javax.xml.bind.JAXBContext;
@@ -95,7 +96,8 @@ public class GpxTrackExtractor {
 	}
 
 	private void writeGpx(String directoryName, GpxDocument gpx)
-			throws JAXBException, PropertyException, SAXException {
+			throws JAXBException, PropertyException, SAXException,
+			URISyntaxException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(GpxDocument.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
@@ -103,8 +105,8 @@ public class GpxTrackExtractor {
 
 		SchemaFactory schemaFactory = SchemaFactory
 				.newInstance("http://www.w3.org/2001/XMLSchema");
-		File schemaFile = new File("resources/gpx.xsd");
-		Schema schema = schemaFactory.newSchema(schemaFile);
+		Schema schema = schemaFactory.newSchema(getClass().getResource(
+				"/resources/schema/gpx.xsd"));
 		marshaller.setSchema(schema);
 
 		File gpxFile = new File(sourceDirectory, directoryName + ".gpx");
