@@ -1,4 +1,4 @@
-package de.gpsConverter.model;
+package de.gpsTrack.model;
 
 import com.drew.lang.CompoundException;
 

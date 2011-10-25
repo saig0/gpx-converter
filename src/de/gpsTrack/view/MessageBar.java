@@ -1,4 +1,4 @@
-package de.gpsConverter.view;
+package de.gpsTrack.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import de.gpsConverter.controler.Result;
-import de.gpsConverter.controler.Result.State;
+import de.gpsTrack.controler.Result;
+import de.gpsTrack.controler.Result.State;
 
 public class MessageBar extends JPanel {
 
@@ -30,13 +30,10 @@ public class MessageBar extends JPanel {
 
 		messageArea = new JTextArea();
 		messageArea.setEditable(false);
-		messageArea.setSize(400, 200);
 		JScrollPane scrollPane = new JScrollPane(messageArea);
-		scrollPane.setSize(400, 200);
 		add(scrollPane);
 
-		setSize(400, 200);
-		setMinimumSize(new Dimension(400, 150));
+		setPreferredSize(new Dimension(400, 100));
 	}
 
 	public void showResult(Result<?> result, String message) {

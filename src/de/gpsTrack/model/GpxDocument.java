@@ -1,4 +1,4 @@
-package de.gpsConverter.model;
+package de.gpsTrack.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +17,7 @@ public class GpxDocument {
 	public static final double version = 1.1;
 
 	@XmlAttribute(name = "creator")
-	public static final String creator = "GPX Converter";
+	public static final String creator = "photo-gps-track-extractor";
 
 	public Track getTrack() {
 		return track;

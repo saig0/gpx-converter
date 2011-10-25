@@ -1,4 +1,4 @@
-package de.gpsConverter.view;
+package de.gpsTrack.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,16 +15,16 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import de.gpsConverter.controler.GpxConverter;
-import de.gpsConverter.controler.Result;
-import de.gpsConverter.controler.ResultCallBack;
-import de.gpsConverter.controler.ResultCallBack.ResultCallBackListener;
-import de.gpsConverter.model.GpxDocument;
+import de.gpsTrack.controler.GpxTrackExtractor;
+import de.gpsTrack.controler.Result;
+import de.gpsTrack.controler.ResultCallBack;
+import de.gpsTrack.controler.ResultCallBack.ResultCallBackListener;
+import de.gpsTrack.model.GpxDocument;
 
-public class GpsConverter {
+public class GpsTrackExtractorView {
 
 	public static void main(String[] args) {
-		GpsConverter gpsConverter = new GpsConverter();
+		GpsTrackExtractorView gpsConverter = new GpsTrackExtractorView();
 		gpsConverter.show();
 	}
 
@@ -40,7 +40,7 @@ public class GpsConverter {
 			e.printStackTrace();
 		}
 
-		final JFrame dialog = new JFrame("GPS Converter");
+		final JFrame dialog = new JFrame("Photo-GPS-Track-Extractor");
 		dialog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dialog.setLayout(new BorderLayout(5, 5));
 
@@ -48,7 +48,7 @@ public class GpsConverter {
 		directoryPanel.setBorder(BorderFactory
 				.createTitledBorder("Verzeichnis der JPEG-Dateien angeben"));
 		dialog.add(directoryPanel, BorderLayout.PAGE_START);
-		directoryPanel.setMinimumSize(new Dimension(400, 100));
+		directoryPanel.setPreferredSize(new Dimension(400, 75));
 
 		final JTextField directoryLabel = new JTextField();
 		directoryLabel.setEditable(false);
@@ -58,7 +58,8 @@ public class GpsConverter {
 		directoryChooseButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFileChooser fileChooser = new JFileChooser();
+				JFileChooser fileChooser = new JFileChooser(directoryLabel
+						.getText());
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 				int state = fileChooser.showOpenDialog(null);
@@ -71,8 +72,8 @@ public class GpsConverter {
 		directoryPanel.add(directoryChooseButton, BorderLayout.LINE_END);
 
 		JPanel actionPanel = new JPanel(new BorderLayout(10, 5));
+		actionPanel.setPreferredSize(new Dimension(400, 75));
 		dialog.add(actionPanel);
-		actionPanel.setMinimumSize(new Dimension(400, 100));
 
 		progressBar = new JProgressBar();
 
@@ -84,7 +85,7 @@ public class GpsConverter {
 				messagePanel.showMessage("");
 				String directory = directoryLabel.getText();
 				if (!directory.isEmpty()) {
-					GpxConverter converter = new GpxConverter(new File(
+					GpxTrackExtractor converter = new GpxTrackExtractor(new File(
 							directory));
 					converter.convertToGpx(new ResultCallBack<GpxDocument>(
 							new ResultCallBackListener<GpxDocument>() {
@@ -124,7 +125,6 @@ public class GpsConverter {
 				}
 			}
 		});
-		converterButton.setSize(400, 25);
 		actionPanel.add(converterButton);
 
 		actionPanel.add(progressBar, BorderLayout.PAGE_END);
@@ -132,7 +132,6 @@ public class GpsConverter {
 		messagePanel = new MessageBar();
 		dialog.add(messagePanel, BorderLayout.PAGE_END);
 
-		// dialog.setSize(new Dimension(400, 300));
 		dialog.pack();
 		dialog.setLocationByPlatform(true);
 		dialog.setVisible(true);
