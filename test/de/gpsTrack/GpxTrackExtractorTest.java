@@ -1,4 +1,4 @@
-package de.gpsConverter;
+package de.gpsTrack;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,21 +8,30 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import de.gpsConverter.controler.GpxConverter;
-import de.gpsConverter.controler.Result;
-import de.gpsConverter.controler.Result.State;
-import de.gpsConverter.controler.ResultCallBack;
-import de.gpsConverter.controler.ResultCallBack.ResultCallBackListener;
-import de.gpsConverter.model.GpxDocument;
-import de.gpsConverter.model.Track;
+import de.gpsTrack.controler.GpxTrackExtractor;
+import de.gpsTrack.controler.Result;
+import de.gpsTrack.controler.Result.State;
+import de.gpsTrack.controler.ResultCallBack;
+import de.gpsTrack.controler.ResultCallBack.ResultCallBackListener;
+import de.gpsTrack.model.GpxDocument;
+import de.gpsTrack.model.Track;
 
-public class GpxConverterTest {
+public class GpxTrackExtractorTest {
+
+	boolean done = false;
+
+	@Before
+	public void setup() {
+		done = false;
+	}
 
 	@Test
 	public void convertJpgs() throws Exception {
-		GpxConverter converter = new GpxConverter(new File(
+
+		GpxTrackExtractor converter = new GpxTrackExtractor(new File(
 				"test-resources/sample"));
 		converter.convertToGpx(new ResultCallBack<GpxDocument>(
 				new ResultCallBackListener<GpxDocument>() {
@@ -42,13 +51,17 @@ public class GpxConverterTest {
 						Track track = gpx.getTrack();
 						assertNotNull(track);
 						assertEquals(6, track.getTrackPoints().size());
+
+						done = true;
 					}
 				}));
+		Thread.sleep(2000);
+		assertTrue(done);
 	}
 
 	@Test
-	public void convertJpgsWithNonExistingFolder() {
-		GpxConverter converter = new GpxConverter(new File(
+	public void convertJpgsWithNonExistingFolder() throws InterruptedException {
+		GpxTrackExtractor converter = new GpxTrackExtractor(new File(
 				"test-resources/not-exist"));
 		converter.convertToGpx(new ResultCallBack<GpxDocument>(
 				new ResultCallBackListener<GpxDocument>() {
@@ -62,13 +75,17 @@ public class GpxConverterTest {
 					public void setResult(Result<GpxDocument> result) {
 						assertEquals(State.Error, result.getState());
 						assertFalse(result.getBufferedExceptions().isEmpty());
+
+						done = true;
 					}
 				}));
+		Thread.sleep(2000);
+		assertTrue(done);
 	}
 
 	@Test
-	public void convertJpgsWithSameFailures() {
-		GpxConverter converter = new GpxConverter(new File(
+	public void convertJpgsWithSameFailures() throws InterruptedException {
+		GpxTrackExtractor converter = new GpxTrackExtractor(new File(
 				"test-resources/sampleWithFail"));
 		converter.convertToGpx(new ResultCallBack<GpxDocument>(
 				new ResultCallBackListener<GpxDocument>() {
@@ -91,7 +108,11 @@ public class GpxConverterTest {
 						Track track = gpx.getTrack();
 						assertNotNull(track);
 						assertEquals(1, track.getTrackPoints().size());
+
+						done = true;
 					}
 				}));
+		Thread.sleep(2000);
+		assertTrue(done);
 	}
 }

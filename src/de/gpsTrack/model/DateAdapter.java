@@ -1,4 +1,4 @@
-package de.gpsConverter.model;
+package de.gpsTrack.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

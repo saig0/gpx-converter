@@ -1,11 +1,11 @@
-package de.gpsConverter.controler;
+package de.gpsTrack.controler;
 
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.GpsDirectory;
 
-import de.gpsConverter.model.ConverterException;
+import de.gpsTrack.model.ConverterException;
 
 public class GpsCoordinateExtractor {
 

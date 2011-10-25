@@ -1,4 +1,4 @@
-package de.gpsConverter.controler;
+package de.gpsTrack.controler;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -20,13 +20,13 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.ExifDirectory;
 
-import de.gpsConverter.controler.Result.State;
-import de.gpsConverter.model.ConverterException;
-import de.gpsConverter.model.GpxDocument;
-import de.gpsConverter.model.Track;
-import de.gpsConverter.model.TrackPoint;
+import de.gpsTrack.controler.Result.State;
+import de.gpsTrack.model.ConverterException;
+import de.gpsTrack.model.GpxDocument;
+import de.gpsTrack.model.Track;
+import de.gpsTrack.model.TrackPoint;
 
-public class GpxConverter {
+public class GpxTrackExtractor {
 
 	private static final class JpegFileFilter implements FilenameFilter {
 		public boolean accept(File dir, String name) {
@@ -37,7 +37,7 @@ public class GpxConverter {
 
 	private final File sourceDirectory;
 
-	public GpxConverter(File sourceDirectory) {
+	public GpxTrackExtractor(File sourceDirectory) {
 		this.sourceDirectory = sourceDirectory;
 	}
 
