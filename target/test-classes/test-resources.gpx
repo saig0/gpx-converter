@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="GPX Converter" version="1.1">
+    <trk>
+        <name>test-resources</name>
+        <trkseg>
+            <trkpt lon="-104.98705277777778" lat="39.73849722222222">
+                <time>2005-09-11T15:34:50</time>
+            </trkpt>
+            <trkpt lon="-104.98928611111111" lat="39.73775555555556">
+                <time>2005-09-11T15:37:51</time>
+            </trkpt>
+            <trkpt lon="-104.99036944444444" lat="39.73920277777778">
+                <time>2005-09-11T15:40:50</time>
+            </trkpt>
+            <trkpt lon="-104.99156111111111" lat="39.73934166666667">
+                <time>2005-09-11T15:43:55</time>
+            </trkpt>
+            <trkpt lon="-104.9916361111111" lat="39.739336111111115">
+                <time>2005-09-11T15:44:08</time>
+            </trkpt>
+            <trkpt lon="-104.98952777777778" lat="39.73994444444445">
+                <time>2005-09-11T15:48:07</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>
