@@ -19,6 +19,9 @@ public class TrackPoint {
 	@XmlAttribute(name = "lon", required = true)
 	private double lontitude;
 
+	@XmlElement(name = "ele", required = false, namespace = "http://www.topografix.com/GPX/1/1")
+	private double elevation;
+
 	@XmlElement(name = "time", required = true, namespace = "http://www.topografix.com/GPX/1/1")
 	@XmlJavaTypeAdapter(value = DateAdapter.class, type = Date.class)
 	private Date date;
@@ -59,6 +62,14 @@ public class TrackPoint {
 	@Override
 	public String toString() {
 		return "TrackPoint [latitude=" + latitude + ", lontitude=" + lontitude
-				+ ", date=" + date + "]";
+				+ ", date=" + date + ", elevation=" + elevation + "]";
+	}
+
+	public double getElevation() {
+		return elevation;
+	}
+
+	public void setElevation(double elevation) {
+		this.elevation = elevation;
 	}
 }
