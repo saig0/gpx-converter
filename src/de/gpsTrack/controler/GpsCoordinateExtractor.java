@@ -66,4 +66,18 @@ public class GpsCoordinateExtractor {
 				+ Double.parseDouble(strArray[1]) / 60
 				+ Double.parseDouble(strArray[2]) / 3600;
 	}
+
+	public Double getElevation() throws MetadataException {
+		Directory gpsDir = metadata.getDirectory(GpsDirectory.class);
+		if (hasElevation()) {
+			double elevation = gpsDir.getDouble(GpsDirectory.TAG_GPS_ALTITUDE);
+			return elevation;
+		} else
+			return null;
+	}
+
+	public boolean hasElevation() {
+		Directory gpsDir = metadata.getDirectory(GpsDirectory.class);
+		return gpsDir.containsTag(GpsDirectory.TAG_GPS_ALTITUDE);
+	}
 }

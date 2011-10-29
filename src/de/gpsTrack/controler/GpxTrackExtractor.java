@@ -124,8 +124,13 @@ public class GpxTrackExtractor {
 				metadata);
 		double latitude = gpsCoordinateExtractor.getLatitude();
 		double lontitude = gpsCoordinateExtractor.getLongitude();
+		TrackPoint trackPoint = new TrackPoint(latitude, lontitude, date);
 
-		return new TrackPoint(latitude, lontitude, date);
+		if (gpsCoordinateExtractor.hasElevation()) {
+			double elevation = gpsCoordinateExtractor.getElevation();
+			trackPoint.setElevation(elevation);
+		}
+		return trackPoint;
 	}
 
 	private Date extractDate(Metadata metadata) throws ConverterException,
